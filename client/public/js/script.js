@@ -1,7 +1,7 @@
 const API_URL = "http://localhost:3000/materias";
 let currentEditId = null;
 
-// Obtiene el valor de "horario" a partir del formulario
+
 function getHorarioFromForm() {
   const dia = document.getElementById("dia").value;
   const horaInicio = document.getElementById("horaInicio").value;
@@ -9,7 +9,7 @@ function getHorarioFromForm() {
   return `${dia} ${horaInicio} - ${horaFin}`;
 }
 
-// Obtiene los eventos ingresados en el formulario
+
 function getEventosFromForm() {
   const eventos = [];
   document.querySelectorAll("#eventos-container .evento").forEach(div => {
@@ -31,7 +31,7 @@ function getEventosFromForm() {
   return eventos;
 }
 
-// Renderiza las materias en la tabla
+
 function renderMaterias(materias) {
   const tbody = document.getElementById("materiasTable").querySelector("tbody");
   tbody.innerHTML = "";
@@ -52,7 +52,7 @@ function renderMaterias(materias) {
   });
 }
 
-// Carga materias desde el API
+// OJO CON ESTO!!!! Carga materias desde el API
 function fetchMaterias() {
   fetch(API_URL)
     .then(response => response.json())
@@ -60,7 +60,7 @@ function fetchMaterias() {
     .catch(err => console.error("Error fetching materias:", err));
 }
 
-// Limpia y resetea el formulario
+
 function clearForm() {
   document.getElementById("materia").value = "";
   document.getElementById("dia").selectedIndex = 0;
@@ -69,11 +69,11 @@ function clearForm() {
   document.getElementById("examen").value = "";
   currentEditId = null;
   document.getElementById("modal-title").textContent = "Nuevo Registro";
-  // Reinicia el contenedor de eventos
+
   document.getElementById("eventos-container").innerHTML = "<h3>Eventos</h3>";
 }
 
-// Funciones para abrir y cerrar el formulario modal
+
 function openFormModal() {
   document.getElementById("form-modal").style.display = "flex";
 }
@@ -82,7 +82,7 @@ function closeFormModal() {
   clearForm();
 }
 
-// Agrega una nueva materia
+
 function addMateria() {
   const nuevaMateria = {
     nombre: document.getElementById("materia").value,
@@ -101,7 +101,7 @@ function addMateria() {
   .catch(err => console.error("Error adding materia:", err));
 }
 
-// Actualiza una materia existente
+
 function updateMateria() {
   const updatedMateria = {
     nombre: document.getElementById("materia").value,
@@ -120,7 +120,7 @@ function updateMateria() {
   .catch(err => console.error("Error updating materia:", err));
 }
 
-// Manejador del botón Guardar
+
 document.getElementById("btnGuardar").addEventListener("click", () => {
   if (currentEditId === null) {
     addMateria();
@@ -129,16 +129,16 @@ document.getElementById("btnGuardar").addEventListener("click", () => {
   }
 });
 
-// Manejador del botón Cancelar
+// botón Cancelar
 document.getElementById("btnCancelar").addEventListener("click", closeFormModal);
 
-// Evento para el botón "Nuevo" en la pantalla principal
+// botón "Nuevo" en la pantalla principal
 document.getElementById("btnOpenForm").addEventListener("click", () => {
   clearForm();
   openFormModal();
 });
 
-// Función para editar una materia
+// Editar la materia
 function editMateria(id) {
   currentEditId = id;
   fetch(`${API_URL}/${id}`)
@@ -156,7 +156,7 @@ function editMateria(id) {
       document.getElementById("dia").value = dia;
       document.getElementById("horaInicio").value = horaInicio;
       document.getElementById("horaFin").value = horaFin;
-      // Reinicializamos el contenedor de eventos
+      // esto solo reinicia el contenedor
       const eventosContainer = document.getElementById("eventos-container");
       eventosContainer.innerHTML = "<h3>Eventos</h3>";
       if (materia.eventos && materia.eventos.length > 0) {
@@ -164,7 +164,7 @@ function editMateria(id) {
           agregarEventoHTML(ev);
         });
       }
-      // Si se desea, se puede poner el campo "examen" – aquí se deja vacío u opcional
+      
       document.getElementById("examen").value = "";
       document.getElementById("modal-title").textContent = "Editar Registro";
       openFormModal();
@@ -172,14 +172,14 @@ function editMateria(id) {
     .catch(err => console.error("Error fetching materia for edit:", err));
 }
 
-// Función para eliminar una materia
+
 function deleteMateria(id) {
   fetch(`${API_URL}/${id}`, { method: "DELETE" })
     .then(() => fetchMaterias())
     .catch(err => console.error("Error deleting materia:", err));
 }
 
-// Función para agregar un bloque de evento al contenedor de eventos
+// agregar un bloque de evento al contenedor de eventos
 function agregarEventoHTML(evento = {}) {
   const container = document.getElementById("eventos-container");
   const div = document.createElement("div");
@@ -208,17 +208,17 @@ function agregarEventoHTML(evento = {}) {
   container.appendChild(div);
 }
 
-// Manejador para el botón "Agregar Evento"
+
 document.getElementById("btnAgregarEvento").addEventListener("click", function() {
   agregarEventoHTML();
 });
 
-// Función para eliminar un bloque de evento
+
 function eliminarEvento(btn) {
   btn.parentElement.remove();
 }
 
-// Función para mostrar detalles en un modal bonito
+//esto hace qeu el modal se vea mas lindo
 function showDetails(id) {
   fetch(`${API_URL}/${id}`)
     .then(response => {
@@ -240,10 +240,10 @@ function showDetails(id) {
     .catch(err => console.error("Error fetching materia details:", err));
 }
 
-// Función para cerrar el modal de detalles
+// 
 function closeDetailsModal() {
   document.getElementById("details-modal").style.display = "none";
 }
 
-// Inicialización: carga las materias al inicio
+// carga las materias al inicio
 fetchMaterias();
