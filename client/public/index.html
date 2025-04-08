@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Agenda de Materias</title>
+  <link rel="stylesheet" href="css/style.css"> <!-- Opcional, si decides tener un archivo de estilos separado -->
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f4f4f4;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    /* Botón "Nuevo" en la pantalla principal */
+    #btnOpenForm {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 15px;
+      font-size: 16px;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    /* Estilos de la tabla */
+    table {
+      width: 80%;
+      margin: 20px auto;
+      background: #fff;
+      border-collapse: collapse;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background: #007bff;
+      color: white;
+    }
+    /* Botones de acción */
+    button {
+      padding: 6px 10px;
+      font-size: 14px;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      margin: 2px;
+    }
+    button.detalles {
+      background: #17a2b8;
+      color: #fff;
+    }
+    button.editar {
+      background: #ffc107;
+      color: #fff;
+    }
+    button.eliminar {
+      background: #dc3545;
+      color: #fff;
+    }
+    /* Modal para el formulario de alta/edición */
+    #form-modal {
+      display: none; /* Oculto inicialmente */
+      position: fixed;
+      z-index: 1001;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      align-items: center;
+      justify-content: center;
+    }
+    #form-modal-content {
+      background: #fff;
+      padding: 20px;
+      width: 500px;
+      max-height: 80vh;
+      overflow-y: auto; /* Barra de desplazamiento vertical */
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    #form-modal-content h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+    #form-modal-content label {
+      display: block;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #form-modal-content input,
+    #form-modal-content select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .button-group {
+      text-align: right;
+    }
+    .button-group button {
+      margin-left: 5px;
+    }
+    /* Sección de Eventos */
+    #eventos-container {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 15px;
+      background: #f9f9f9;
+    }
+    .evento {
+      border: 1px solid #ccc;
+      padding: 8px;
+      margin-bottom: 10px;
+      background: #fff;
+      border-radius: 3px;
+    }
+    .evento button {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 2px 5px;
+    }
+    /* (Opcional) Modal para Detalles */
+    #details-modal {
+      display: none;
+      position: fixed;
+      z-index: 1002;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      align-items: center;
+      justify-content: center;
+    }
+    #details-modal-content {
+      background: #fff;
+      padding: 20px;
+      width: 70%;
+      max-width: 600px;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      position: relative;
+    }
+    #details-modal-content h2 {
+      text-align: center;
+    }
+    #details-modal-content .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #details-modal-content .close:hover {
+      background: #c82333;
+    }
+    #details-content p {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <h1>Agenda de Materias</h1>
+  <button id="btnOpenForm">Nuevo</button>
+  <table id="materiasTable">
+    <thead>
+      <tr>
+        <th>Materia</th>
+        <th>Día</th>
+        <th>Horario</th>
+        <th>Examen</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <!-- Modal para el formulario de alta/edición -->
+  <div id="form-modal">
+    <div id="form-modal-content">
+      <h2 id="modal-title">Nuevo Registro</h2>
+      <label for="materia">Materia:</label>
+      <input type="text" id="materia" placeholder="Nombre de la materia">
+      <label for="dia">Día:</label>
+      <select id="dia">
+        <option value="Lunes">Lunes</option>
+        <option value="Martes">Martes</option>
+        <option value="Miércoles">Miércoles</option>
+        <option value="Jueves">Jueves</option>
+        <option value="Viernes">Viernes</option>
+        <option value="Sábado">Sábado</option>
+        <option value="Domingo">Domingo</option>
+      </select>
+      <label for="horaInicio">Hora de Inicio:</label>
+      <input type="time" id="horaInicio">
+      <label for="horaFin">Hora de Fin:</label>
+      <input type="time" id="horaFin">
+      <label for="examen">Fecha de Examen (opcional):</label>
+      <input type="date" id="examen">
+      <!-- Sección dinámica para Eventos -->
+      <div id="eventos-container">
+        <h3>Eventos</h3>
+      </div>
+      <button id="btnAgregarEvento" type="button">Agregar Evento</button>
+      <div class="button-group">
+        <button id="btnGuardar">Guardar</button>
+        <button id="btnCancelar">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  <!-- (Opcional) Modal para mostrar detalles -->
+  <div id="details-modal">
+    <div id="details-modal-content">
+      <button class="close" onclick="closeDetailsModal()">×</button>
+      <h2>Detalles de la Materia</h2>
+      <div id="details-content"></div>
+    </div>
+  </div>
+  <script src="js/script.js"></script>
+</body>
+</html>
