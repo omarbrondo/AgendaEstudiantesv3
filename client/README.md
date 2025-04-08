@@ -1,22 +1,23 @@
-Para iniciar primero ejecutamos
+## Para iniciar primero ejecutamos
 
 npm init -y
 
-instalamos express
+## instalamos express
 
 npm install express
 
-Nodemon
+## Nodemon
 
 npm install --save-dev nodemon
 
-instalamos cors
+## instalamos cors
 
 npm install cors
 
+## Ejecutamos el servidor
 npm run dev
 
-endpoint de ejemplo
+# endpoint de ejemplo
 
 {
   "nombre": "Matemática I",

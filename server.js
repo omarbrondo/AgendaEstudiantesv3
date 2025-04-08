@@ -4,17 +4,17 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware
+
 app.use(express.json());
 app.use(cors());
 
 // Base de datos en memoria: Solo materias
 let materias = [];
 
-// Servir archivos estáticos desde 'client/public'
+// Para los archivos estáticos desde 'client/public'
 app.use(express.static(path.join(__dirname, "client", "public")));
 
-// Ruta raíz para el frontend
+// Esto es para levantar la ruta raíz para el frontend y que funcione el index.html
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "public", "index.html"));
 });
@@ -43,7 +43,7 @@ app.post("/materias", (req, res) => {
   res.status(201).json(nuevaMateria);
 });
 
-// Endpoint PUT: Actualiza una materia existente
+// Endpoint PUT: Actualiza una materia 
 app.put("/materias/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = materias.findIndex(materia => materia.id === id);
