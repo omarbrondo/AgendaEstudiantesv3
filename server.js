@@ -4,17 +4,16 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 
-
 app.use(express.json());
 app.use(cors());
 
 // Base de datos en memoria: Solo materias
 let materias = [];
 
-// Para los archivos estáticos desde 'client/public'
+// Servir archivos estáticos desde 'client/public'
 app.use(express.static(path.join(__dirname, "client", "public")));
 
-// Esto es para levantar la ruta raíz para el frontend y que funcione el index.html
+// Ruta raíz para el frontend
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "public", "index.html"));
 });
@@ -35,15 +34,23 @@ app.get("/materias/:id", (req, res) => {
   }
 });
 
-// Endpoint POST: Crea una nueva materia
+// Endpoint POST: Crea una o más materias
 app.post("/materias", (req, res) => {
-  // Se espera que se envíe la información de la materia directamente
-  const nuevaMateria = { ...req.body, id: Date.now() };
-  materias.push(nuevaMateria);
-  res.status(201).json(nuevaMateria);
+  // Si se envía un arreglo, procesa cada materia y asigna un id único
+  if (Array.isArray(req.body)) {
+    const nuevasMaterias = req.body.map((m, index) => {
+      return { ...m, id: Date.now() + index };
+    });
+    materias = materias.concat(nuevasMaterias);
+    res.status(201).json(nuevasMaterias);
+  } else {
+    const nuevaMateria = { ...req.body, id: Date.now() };
+    materias.push(nuevaMateria);
+    res.status(201).json(nuevaMateria);
+  }
 });
 
-// Endpoint PUT: Actualiza una materia 
+// Endpoint PUT: Actualiza una materia existente por ID
 app.put("/materias/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = materias.findIndex(materia => materia.id === id);
@@ -55,7 +62,7 @@ app.put("/materias/:id", (req, res) => {
   }
 });
 
-// Endpoint DELETE: Elimina una materia
+// Endpoint DELETE: Elimina una materia por ID
 app.delete("/materias/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const prevLength = materias.length;

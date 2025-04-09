@@ -1,0 +1,56 @@
+[
+    {
+        "nombre": "Matemática I",
+        "anioDeCarrera": 2,
+        "anio": "2025",
+        "horario": "Lunes 08:00 - 12:00",
+        "modalidad": "Presencial",
+        "correlativas": [
+            ""
+        ],
+        "notas": {
+            "parcial1": 7,
+            "parcial2": 8,
+            "final": null
+        },
+        "eventos": [
+            {
+                "tipo": "Parcial",
+                "numero": 1,
+                "temasAEstudiar": "Funciones, límites",
+                "estado": "En curso",
+                "fechaEntrega": "2025-06-10",
+                "nota": null
+            },
+            {
+                "tipo": "Trabajo Práctico",
+                "numero": 2,
+                "temasAEstudiar": "Proyecto de integración",
+                "estado": "Pendiente",
+                "fechaEntrega": "2025-05-15",
+                "nota": null
+            }
+        ],
+        "id": 1744155575522
+    },
+    {
+        "nombre": "Lengua",
+        "horario": "Sábado 08:51 - 20:56",
+        "examen": "2025-04-09",
+        "notas": {
+            "parcial1": 1,
+            "parcial2": 2,
+            "final": 3
+        },
+        "eventos": [
+            {
+                "tipo": "Parcial",
+                "numero": 1,
+                "temasAEstudiar": "",
+                "estado": "Finalizado",
+                "fechaEntrega": "2025-04-23",
+                "nota": 2
+            }
+        ]
+    }
+]
