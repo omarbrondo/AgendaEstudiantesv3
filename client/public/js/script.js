@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btnCancelar.addEventListener("click", () => {
     closeFormModal();
-    // Si se cancela la edición, se reinicia la variable global
+    // Reiniciamos la variable global cuando se cancela la edición
     editingMateriaId = null;
   });
 
@@ -138,7 +138,6 @@ function getMateriaFromForm() {
   const horario = dia && horaInicio && horaFin ? `${dia} ${horaInicio} - ${horaFin}` : "N/A";
 
   const examen = document.getElementById("examen").value;
-
   const notaParcial1 = document.getElementById("notaParcial1").value;
   const notaParcial2 = document.getElementById("notaParcial2").value;
   const notaFinal = document.getElementById("notaFinal").value;
@@ -146,6 +145,7 @@ function getMateriaFromForm() {
   // Recolecta los eventos agregados dinámicamente
   const eventos = [];
   document.querySelectorAll(".evento").forEach((eventoDiv) => {
+    // Los campos "tipo" y "estado" ahora son <select>
     const tipo = eventoDiv.querySelector(".tipo").value;
     const numero = parseInt(eventoDiv.querySelector(".numero").value);
     const temasAEstudiar = eventoDiv.querySelector(".temasAEstudiar").value;
@@ -204,15 +204,43 @@ function saveMateria() {
   }
 }
 
+// Función agregada para eliminar una materia completa
+function deleteMateria(id) {
+  fetch(`/materias/${id}`, { method: "DELETE" })
+    .then((response) => {
+      if (response.ok) {
+        loadMaterias();
+      } else {
+        alert("Error al eliminar la materia.");
+      }
+    })
+    .catch((err) => console.error(err));
+}
+
 function agregarEvento() {
   const eventosContainer = document.getElementById("eventos-container");
   const eventoDiv = document.createElement("div");
   eventoDiv.classList.add("evento");
   eventoDiv.innerHTML = `
-    <label>Tipo: <input type="text" class="tipo" placeholder="Tipo de evento"></label>
+    <label>Tipo: 
+      <select class="tipo">
+        <option value="Parcial 1">Parcial 1</option>
+        <option value="Parcial 2">Parcial 2</option>
+        <option value="Recuperatorio 1">Recuperatorio 1</option>
+        <option value="Recuperatorio 2">Recuperatorio 2</option>
+        <option value="Trabajo Practico">Trabajo Practico</option>
+        <option value="Examen Final">Examen Final</option>
+      </select>
+    </label>
     <label>Número: <input type="number" class="numero" placeholder="Número"></label>
     <label>Temas a Estudiar: <input type="text" class="temasAEstudiar" placeholder="Temas"></label>
-    <label>Estado: <input type="text" class="estado" placeholder="Estado"></label>
+    <label>Estado: 
+      <select class="estado">
+        <option value="Pendiente">Pendiente</option>
+        <option value="En curso">En curso</option>
+        <option value="Finalizado">Finalizado</option>
+      </select>
+    </label>
     <label>Fecha de Entrega: <input type="date" class="fechaEntrega"></label>
     <button type="button" onclick="eliminarEvento(this)">Eliminar Evento</button>
   `;
@@ -260,12 +288,11 @@ function closeDetailsModal() {
 }
 
 function editMateria(id) {
-  // Se guarda el id en la variable global para saber que se edita
+  // Se almacena el id en la variable global para saber que se edita
   editingMateriaId = id;
-  // Se modifica el título del modal para indicar edición
   document.getElementById("modal-title").innerText = "Editar Registro";
   
-  // Se obtiene la materia a editar y se precargan sus datos en el formulario
+  // Se obtiene la materia a editar para precargar los datos en el formulario
   fetch(`/materias/${id}`)
     .then((res) => res.json())
     .then((materia) => {
@@ -277,7 +304,7 @@ function editMateria(id) {
         ? materia.correlativas.join(", ")
         : "";
       
-      // Procesa el campo "horario", que tiene formato "Día HH:MM - HH:MM"
+      // Procesa el campo "horario" (formato "Día HH:MM - HH:MM")
       if (materia.horario && materia.horario !== "N/A") {
         const parts = materia.horario.split(" ");
         document.getElementById("dia").value = parts[0] || "Lunes";
@@ -302,10 +329,25 @@ function editMateria(id) {
           const eventoDiv = document.createElement("div");
           eventoDiv.classList.add("evento");
           eventoDiv.innerHTML = `
-            <label>Tipo: <input type="text" class="tipo" value="${ev.tipo}" placeholder="Tipo de evento"></label>
+            <label>Tipo: 
+              <select class="tipo">
+                <option value="Parcial 1" ${ev.tipo === "Parcial 1" ? "selected" : ""}>Parcial 1</option>
+                <option value="Parcial 2" ${ev.tipo === "Parcial 2" ? "selected" : ""}>Parcial 2</option>
+                <option value="Recuperatorio 1" ${ev.tipo === "Recuperatorio 1" ? "selected" : ""}>Recuperatorio 1</option>
+                <option value="Recuperatorio 2" ${ev.tipo === "Recuperatorio 2" ? "selected" : ""}>Recuperatorio 2</option>
+                <option value="Trabajo Practico" ${ev.tipo === "Trabajo Practico" ? "selected" : ""}>Trabajo Practico</option>
+                <option value="Examen Final" ${ev.tipo === "Examen Final" ? "selected" : ""}>Examen Final</option>
+              </select>
+            </label>
             <label>Número: <input type="number" class="numero" value="${ev.numero}" placeholder="Número"></label>
             <label>Temas a Estudiar: <input type="text" class="temasAEstudiar" value="${ev.temasAEstudiar}" placeholder="Temas"></label>
-            <label>Estado: <input type="text" class="estado" value="${ev.estado}" placeholder="Estado"></label>
+            <label>Estado: 
+              <select class="estado">
+                <option value="Pendiente" ${ev.estado === "Pendiente" ? "selected" : ""}>Pendiente</option>
+                <option value="En curso" ${ev.estado === "En curso" ? "selected" : ""}>En curso</option>
+                <option value="Finalizado" ${ev.estado === "Finalizado" ? "selected" : ""}>Finalizado</option>
+              </select>
+            </label>
             <label>Fecha de Entrega: <input type="date" class="fechaEntrega" value="${ev.fechaEntrega}" placeholder="Fecha"></label>
             <button type="button" onclick="eliminarEvento(this)">Eliminar Evento</button>
           `;
