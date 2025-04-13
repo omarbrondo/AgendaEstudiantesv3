@@ -4,26 +4,31 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 3000;
 
+let materias = require('./client/Data/materias.json'); // Comentar esto para no trabajar con un json local, le pusimos let y no const para que permita eliminar
+
 app.use(express.json());
 app.use(cors());
 
-// Base de datos en memoria: Solo materias
-let materias = [];
 
-// Servir archivos estáticos desde 'client/public'
+//let materias = []; 
+/*activar este array y eliminar o comentar const materias =
+ require('./client/Data/materias.json') para trabajar con una base en blanco*/
+
+
 app.use(express.static(path.join(__dirname, "client", "public")));
 
-// Ruta raíz para el frontend
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "public", "index.html"));
 });
 
-// Endpoint GET: Devuelve todas las materias
+
 app.get("/materias", (req, res) => {
+
   res.json(materias);
 });
 
-// Endpoint GET individual: Devuelve una materia por ID
+
 app.get("/materias/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const materia = materias.find(m => m.id === id);
@@ -34,9 +39,8 @@ app.get("/materias/:id", (req, res) => {
   }
 });
 
-// Endpoint POST: Crea una o más materias
+
 app.post("/materias", (req, res) => {
-  // Si se envía un arreglo, procesa cada materia y asigna un id único
   if (Array.isArray(req.body)) {
     const nuevasMaterias = req.body.map((m, index) => {
       return { ...m, id: Date.now() + index };
@@ -50,7 +54,7 @@ app.post("/materias", (req, res) => {
   }
 });
 
-// Endpoint PUT: Actualiza una materia existente por ID
+
 app.put("/materias/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const index = materias.findIndex(materia => materia.id === id);
@@ -62,7 +66,7 @@ app.put("/materias/:id", (req, res) => {
   }
 });
 
-// Endpoint DELETE: Elimina una materia por ID
+
 app.delete("/materias/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const prevLength = materias.length;

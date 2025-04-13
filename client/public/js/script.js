@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   btnCancelar.addEventListener("click", () => {
     closeFormModal();
-    // Reiniciamos la variable global cuando se cancela la edición
+
     editingMateriaId = null;
   });
 
