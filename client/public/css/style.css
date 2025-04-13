@@ -1,9 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+MX+Guides&display=swap');
+
+
+
+.pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 body {
   font-family: 'Roboto', Arial, sans-serif; 
   margin: 0; 
   padding: 0; 
   background: linear-gradient(120deg, #f4f4f4, #e9ecef); 
   color: #333; 
+}
 
 .header-container {
   display: flex; 
@@ -20,7 +32,7 @@ body {
 }
 
 .header-container h1 {
-  font-family: 'Roboto', Arial, sans-serif; 
+  font-family: "Pacifico", cursive;
   font-size: 24px; 
   color: #fff; 
   text-transform: uppercase; 
