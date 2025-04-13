@@ -1,45 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+MX+Guides&display=swap');
 
-
-
+/* Fuente personalizada */
 .pacifico-regular {
   font-family: "Pacifico", cursive;
   font-weight: 400;
   font-style: normal;
 }
 
+/* Reseteo y configuración básica */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Asegura que el body ocupe toda la altura del viewport */
+}
 
 body {
-  font-family: 'Roboto', Arial, sans-serif; 
-  margin: 0; 
-  padding: 0; 
-  background: linear-gradient(120deg, #f4f4f4, #e9ecef); 
-  color: #333; 
+  font-family: 'Roboto', Arial, sans-serif;
+  background: linear-gradient(120deg, #f4f4f4, #e9ecef);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Se asegura que siempre ocupe la altura del viewport */
 }
 
 .header-container {
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 15px;
-  background: linear-gradient(90deg, #007bff, #0056b3); 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .header-container .logo {
-  max-width: 50px; 
-  margin-right: 10px; 
+  max-width: 50px;
+  margin-right: 10px;
 }
 
 .header-container h1 {
   font-family: "Pacifico", cursive;
-  font-size: 24px; 
-  color: #fff; 
-  text-transform: uppercase; 
-  letter-spacing: 1.5px; 
-  margin: 0; 
+  font-size: 24px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
 }
-
 
 #btnOpenForm {
   display: block;
@@ -47,27 +52,25 @@ body {
   padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
-  background: #025a18aa; 
+  background: #025a18aa;
   color: #fff;
   border: none;
-  border-radius: 30px; 
+  border-radius: 30px;
   cursor: pointer;
   transition: background 0.3s ease;
 }
 
 #btnOpenForm:hover {
-  background: #0056b3; 
+  background: #0056b3;
 }
-
-
 
 table {
   width: 90%;
   margin: 20px auto;
   background: #fff;
   border-collapse: collapse;
-  border-radius: 10px; 
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
@@ -90,54 +93,6 @@ td {
   color: #555;
 }
 
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #b5c1cc;
-  color: #fff;
-  bottom: 0; 
-  width: 100%;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); 
-}
-
-
-
-footer div img {
-  max-width: 300px;
-  height: auto;
-  margin-bottom: 10px;
-  transition: transform 0.2s ease;
-}
-
-footer div img:hover {
-  transform: scale(1.1); 
-}
-
-
-
-footer p {
-  margin-top: 10px;
-  font-size: 16px;
-  color: #100808; 
-}
-
-
-table,
-th,
-td {
-  border: 1px solid #ddd;
-}
-th,
-td {
-  padding: 10px;
-  text-align: center;
-}
-th {
-  background: #007bff;
-  color: white;
-}
-
 button {
   padding: 8px 12px;
   font-size: 14px;
@@ -154,7 +109,7 @@ button.detalles {
 }
 
 button.detalles:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
   background: #138496;
 }
 
@@ -168,19 +123,17 @@ button.editar:hover {
   background: #d39e00;
 }
 
-
 button.eliminar {
   background: #dc3545;
   color: #fff;
 }
-
 
 button.eliminar:hover {
   transform: scale(1.05);
   background: #bd2130;
 }
 
-
+/* Modal */
 #form-modal {
   display: none;
   position: fixed;
@@ -193,6 +146,7 @@ button.eliminar:hover {
   align-items: center;
   justify-content: center;
 }
+
 #form-modal-content {
   background: #fff;
   padding: 20px;
@@ -202,15 +156,18 @@ button.eliminar:hover {
   border-radius: 5px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
+
 #form-modal-content h2 {
   margin-top: 0;
   text-align: center;
 }
+
 #form-modal-content label {
   display: block;
   font-weight: bold;
   margin-top: 10px;
 }
+
 #form-modal-content input,
 #form-modal-content select {
   width: 100%;
@@ -221,39 +178,35 @@ button.eliminar:hover {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-.button-group {
-  text-align: right;
-}
-.button-group button {
-  margin-left: 5px;
+
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #b7bfc7;
+  color: #fff;
+  width: 100%;
+  margin-top: auto; /* Empuja el footer al fondo */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
 }
 
-#eventos-container {
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 15px;
-  background: #f9f9f9;
-}
-.evento {
-  border: 1px solid #ccc;
-  padding: 8px;
+footer div img {
+  max-width: 300px;
+  height: auto;
   margin-bottom: 10px;
-  background: #fff;
-  border-radius: 3px;
+  transition: transform 0.2s ease;
 }
-.evento label {
-  font-weight: normal;
-  margin-right: 5px;
+
+footer div img:hover {
+  transform: scale(1.1);
 }
-.evento button {
-  background: #dc3545;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 2px 5px;
+
+footer p {
+  margin: 0;
+  font-size: 16px;
+  color: #0a0101;
 }
+
 
 #details-modal {
   display: none;
@@ -267,6 +220,7 @@ button.eliminar:hover {
   align-items: center;
   justify-content: center;
 }
+
 #details-modal-content {
   background: #fff;
   padding: 20px;
@@ -276,9 +230,11 @@ button.eliminar:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   position: relative;
 }
+
 #details-modal-content h2 {
   text-align: center;
 }
+
 #details-modal-content .close {
   position: absolute;
   top: 10px;
@@ -292,9 +248,11 @@ button.eliminar:hover {
   font-size: 16px;
   cursor: pointer;
 }
+
 #details-modal-content .close:hover {
   background: #c82333;
 }
+
 #details-content p {
   margin: 10px 0;
   line-height: 1.5;
