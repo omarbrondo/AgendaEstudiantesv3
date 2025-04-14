@@ -9,7 +9,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "agendaestudiantes": "file:",
     "cors": "^2.8.5",
@@ -17,5 +16,14 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omarbrondo/AgendaEstudiantesv3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/omarbrondo/AgendaEstudiantesv3/issues"
+  },
+  "homepage": "https://github.com/omarbrondo/AgendaEstudiantesv3#readme",
+  "description": ""
 }

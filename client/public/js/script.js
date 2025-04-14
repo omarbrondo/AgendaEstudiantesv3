@@ -1,4 +1,4 @@
-// Variable global para saber si se está editando una materia
+//test comentario
 let editingMateriaId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
