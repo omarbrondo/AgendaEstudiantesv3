@@ -64,11 +64,13 @@ function renderMaterias(materias) {
     const examenFecha = materia.examen || "N/A";
     const notasResumen = materia.notas
       ? `P1: ${
-          materia.notas.parcial1 !== undefined && materia.notas.parcial1 !== null
+          materia.notas.parcial1 !== undefined &&
+          materia.notas.parcial1 !== null
             ? materia.notas.parcial1
             : "N/A"
         }, P2: ${
-          materia.notas.parcial2 !== undefined && materia.notas.parcial2 !== null
+          materia.notas.parcial2 !== undefined &&
+          materia.notas.parcial2 !== null
             ? materia.notas.parcial2
             : "N/A"
         }, Final: ${
@@ -89,11 +91,24 @@ function renderMaterias(materias) {
       <td>${examenFecha}</td>
       <td>${notasResumen}</td>
       <td>
-        <button class="detalles" onclick="showDetails(${materia.id})">Detalles</button>
-        <button class="editar" onclick="editMateria(${materia.id})">Editar</button>
-        <button class="eliminar" onclick="deleteMateria(${materia.id})">Eliminar</button>
-      </td>
-    `;
+        <span class="detalles" onclick="showDetails(${materia.id})">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="current color" class="bi bi-eye-fill" viewBox="0 0 16 16">
+        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+        </svg> </span>
+
+        <span class="editar" onclick="editMateria(${materia.id})">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+        </svg></span>
+
+        <span class="eliminar" onclick="deleteMateria(${materia.id})">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+        </svg></span>
+        </td>
+        `;
     tbody.appendChild(tr);
   });
 }
@@ -130,12 +145,15 @@ function getMateriaFromForm() {
   const anio = document.getElementById("anio").value;
   const modalidad = document.getElementById("modalidad").value;
   const correlativasStr = document.getElementById("correlativas").value;
-  const correlativas = correlativasStr ? correlativasStr.split(",").map((s) => s.trim()) : [];
+  const correlativas = correlativasStr
+    ? correlativasStr.split(",").map((s) => s.trim())
+    : [];
 
   const dia = document.getElementById("dia").value;
   const horaInicio = document.getElementById("horaInicio").value;
   const horaFin = document.getElementById("horaFin").value;
-  const horario = dia && horaInicio && horaFin ? `${dia} ${horaInicio} - ${horaFin}` : "N/A";
+  const horario =
+    dia && horaInicio && horaFin ? `${dia} ${horaInicio} - ${horaFin}` : "N/A";
 
   const examen = document.getElementById("examen").value;
   const notaParcial1 = document.getElementById("notaParcial1").value;
@@ -258,11 +276,17 @@ function showDetails(id) {
       const detailsContent = document.getElementById("details-content");
       detailsContent.innerHTML = `
         <p><strong>Materia:</strong> ${materia.nombre || "N/A"}</p>
-        <p><strong>Año de Carrera:</strong> ${materia.anioDeCarrera || "N/A"}</p>
+        <p><strong>Año de Carrera:</strong> ${
+          materia.anioDeCarrera || "N/A"
+        }</p>
         <p><strong>Año:</strong> ${materia.anio || "N/A"}</p>
         <p><strong>Horario:</strong> ${materia.horario || "N/A"}</p>
         <p><strong>Modalidad:</strong> ${materia.modalidad || "N/A"}</p>
-        <p><strong>Correlativas:</strong> ${Array.isArray(materia.correlativas) ? materia.correlativas.join(", ") : "N/A"}</p>
+        <p><strong>Correlativas:</strong> ${
+          Array.isArray(materia.correlativas)
+            ? materia.correlativas.join(", ")
+            : "N/A"
+        }</p>
         <p><strong>Fecha de Examen:</strong> ${materia.examen || "N/A"}</p>
         <p><strong>Notas:</strong> ${
           materia.notas
@@ -291,19 +315,23 @@ function editMateria(id) {
   // Se almacena el id en la variable global para saber que se edita
   editingMateriaId = id;
   document.getElementById("modal-title").innerText = "Editar Registro";
-  
+
   // Se obtiene la materia a editar para precargar los datos en el formulario
   fetch(`/materias/${id}`)
     .then((res) => res.json())
     .then((materia) => {
       document.getElementById("materia").value = materia.nombre || "";
-      document.getElementById("anioDeCarrera").value = materia.anioDeCarrera || "";
+      document.getElementById("anioDeCarrera").value =
+        materia.anioDeCarrera || "";
       document.getElementById("anio").value = materia.anio || "";
-      document.getElementById("modalidad").value = materia.modalidad || "Presencial";
-      document.getElementById("correlativas").value = Array.isArray(materia.correlativas)
+      document.getElementById("modalidad").value =
+        materia.modalidad || "Presencial";
+      document.getElementById("correlativas").value = Array.isArray(
+        materia.correlativas
+      )
         ? materia.correlativas.join(", ")
         : "";
-      
+
       // Procesa el campo "horario" (formato "Día HH:MM - HH:MM")
       if (materia.horario && materia.horario !== "N/A") {
         const parts = materia.horario.split(" ");
@@ -315,12 +343,15 @@ function editMateria(id) {
         document.getElementById("horaInicio").value = "";
         document.getElementById("horaFin").value = "";
       }
-      
+
       document.getElementById("examen").value = materia.examen || "";
-      document.getElementById("notaParcial1").value = materia.notas && materia.notas.parcial1 ? materia.notas.parcial1 : "";
-      document.getElementById("notaParcial2").value = materia.notas && materia.notas.parcial2 ? materia.notas.parcial2 : "";
-      document.getElementById("notaFinal").value = materia.notas && materia.notas.final ? materia.notas.final : "";
-      
+      document.getElementById("notaParcial1").value =
+        materia.notas && materia.notas.parcial1 ? materia.notas.parcial1 : "";
+      document.getElementById("notaParcial2").value =
+        materia.notas && materia.notas.parcial2 ? materia.notas.parcial2 : "";
+      document.getElementById("notaFinal").value =
+        materia.notas && materia.notas.final ? materia.notas.final : "";
+
       // Rellena el contenedor de eventos con la información existente
       const eventosContainer = document.getElementById("eventos-container");
       eventosContainer.innerHTML = `<h3>Eventos</h3>`;
@@ -331,30 +362,54 @@ function editMateria(id) {
           eventoDiv.innerHTML = `
             <label>Tipo: 
               <select class="tipo">
-                <option value="Parcial 1" ${ev.tipo === "Parcial 1" ? "selected" : ""}>Parcial 1</option>
-                <option value="Parcial 2" ${ev.tipo === "Parcial 2" ? "selected" : ""}>Parcial 2</option>
-                <option value="Recuperatorio 1" ${ev.tipo === "Recuperatorio 1" ? "selected" : ""}>Recuperatorio 1</option>
-                <option value="Recuperatorio 2" ${ev.tipo === "Recuperatorio 2" ? "selected" : ""}>Recuperatorio 2</option>
-                <option value="Trabajo Practico" ${ev.tipo === "Trabajo Practico" ? "selected" : ""}>Trabajo Practico</option>
-                <option value="Examen Final" ${ev.tipo === "Examen Final" ? "selected" : ""}>Examen Final</option>
+                <option value="Parcial 1" ${
+                  ev.tipo === "Parcial 1" ? "selected" : ""
+                }>Parcial 1</option>
+                <option value="Parcial 2" ${
+                  ev.tipo === "Parcial 2" ? "selected" : ""
+                }>Parcial 2</option>
+                <option value="Recuperatorio 1" ${
+                  ev.tipo === "Recuperatorio 1" ? "selected" : ""
+                }>Recuperatorio 1</option>
+                <option value="Recuperatorio 2" ${
+                  ev.tipo === "Recuperatorio 2" ? "selected" : ""
+                }>Recuperatorio 2</option>
+                <option value="Trabajo Practico" ${
+                  ev.tipo === "Trabajo Practico" ? "selected" : ""
+                }>Trabajo Practico</option>
+                <option value="Examen Final" ${
+                  ev.tipo === "Examen Final" ? "selected" : ""
+                }>Examen Final</option>
               </select>
             </label>
-            <label>Número: <input type="number" class="numero" value="${ev.numero}" placeholder="Número"></label>
-            <label>Temas a Estudiar: <input type="text" class="temasAEstudiar" value="${ev.temasAEstudiar}" placeholder="Temas"></label>
+            <label>Número: <input type="number" class="numero" value="${
+              ev.numero
+            }" placeholder="Número"></label>
+            <label>Temas a Estudiar: <input type="text" class="temasAEstudiar" value="${
+              ev.temasAEstudiar
+            }" placeholder="Temas"></label>
             <label>Estado: 
               <select class="estado">
-                <option value="Pendiente" ${ev.estado === "Pendiente" ? "selected" : ""}>Pendiente</option>
-                <option value="En curso" ${ev.estado === "En curso" ? "selected" : ""}>En curso</option>
-                <option value="Finalizado" ${ev.estado === "Finalizado" ? "selected" : ""}>Finalizado</option>
+                <option value="Pendiente" ${
+                  ev.estado === "Pendiente" ? "selected" : ""
+                }>Pendiente</option>
+                <option value="En curso" ${
+                  ev.estado === "En curso" ? "selected" : ""
+                }>En curso</option>
+                <option value="Finalizado" ${
+                  ev.estado === "Finalizado" ? "selected" : ""
+                }>Finalizado</option>
               </select>
             </label>
-            <label>Fecha de Entrega: <input type="date" class="fechaEntrega" value="${ev.fechaEntrega}" placeholder="Fecha"></label>
+            <label>Fecha de Entrega: <input type="date" class="fechaEntrega" value="${
+              ev.fechaEntrega
+            }" placeholder="Fecha"></label>
             <button type="button" onclick="eliminarEvento(this)">Eliminar Evento</button>
           `;
           eventosContainer.appendChild(eventoDiv);
         });
       }
-      
+
       openFormModal();
     })
     .catch((err) => console.error(err));
