@@ -1,4 +1,4 @@
-//test comentario
+//test comentario Omar Brondo
 let editingMateriaId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
