@@ -223,7 +223,7 @@ function saveMateria() {
 }
 
 // Función agregada para eliminar una materia completa
-function deleteMateria(id) {
+/*function deleteMateria(id) {
   fetch(`/materias/${id}`, { method: "DELETE" })
     .then((response) => {
       if (response.ok) {
@@ -233,6 +233,41 @@ function deleteMateria(id) {
       }
     })
     .catch((err) => console.error(err));
+}*/
+function deleteMateria(id) {
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: "Esta acción eliminará el registro.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#dc3545',
+    cancelButtonColor: '#6c757d',
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // Realiza la petición DELETE
+      fetch(`/materias/${id}`, { method: "DELETE" })
+        .then((response) => {
+          if (response.ok) {
+            Swal.fire({
+              title: 'Eliminado!',
+              text: 'El registro ha sido eliminado exitosamente.',
+              icon: 'success',
+              timer: 1500,
+              showConfirmButton: false
+            });
+            loadMaterias(); // Función para recargar/actualizar la lista
+          } else {
+            Swal.fire('Error', 'Error al eliminar la materia.', 'error');
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          Swal.fire('Error', 'Error al eliminar la materia.', 'error');
+        });
+    }
+  });
 }
 
 function agregarEvento() {
