@@ -346,12 +346,25 @@ function closeDetailsModal() {
   document.getElementById("details-modal").style.display = "none";
 }
 
+
+function showInfo() {
+  Swal.fire({
+    html: '<b>Alumnos:</b><br>' +
+          'Barbara Carrizo<br>' +
+          'Omar Brondo<br>' +
+          'Karen Micaela Pelozo<br>' +
+          'Pamela Chaparro<br>' +
+          'Clara Cantarino<br><br>' +
+          '<p><a href="https://docs.google.com/document/d/1zQBbgAdg82HDtQB4AIF1LNaEBVDkqgkTWYfx8hYyluA/edit?tab=t.0" target="_blank" style="color:#3085d6;">Ver documentación</a></p>',
+    confirmButtonText: 'Aceptar'
+  });
+}
+
 function editMateria(id) {
-  // Se almacena el id en la variable global para saber que se edita
+
   editingMateriaId = id;
   document.getElementById("modal-title").innerText = "Editar Registro";
 
-  // Se obtiene la materia a editar para precargar los datos en el formulario
   fetch(`/materias/${id}`)
     .then((res) => res.json())
     .then((materia) => {
@@ -448,4 +461,5 @@ function editMateria(id) {
       openFormModal();
     })
     .catch((err) => console.error(err));
+
 }
