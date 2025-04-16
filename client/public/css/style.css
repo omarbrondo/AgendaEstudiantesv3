@@ -47,8 +47,9 @@ body {
 }
 
 #btnOpenForm {
-  display: block;
-  margin: 20px auto;
+  align-self: flex-start;      /* Anula el estiramiento y lo coloca a la izquierda */
+  display: inline-block;       /* El botón ocupará el ancho de su contenido */
+  margin: 20px 20px 20px 20px;   /* Puedes ajustar márgenes; aquí se le da 20px en todos lados */
   padding: 12px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -60,6 +61,10 @@ body {
   transition: background 0.3s ease;
 }
 
+#btnOpenForm:hover {
+  background: #ffaa00;
+}
+
 .logo {
   width: 65px;
   height: 65px;
@@ -67,9 +72,7 @@ body {
   margin-right: 8px;
 }
 
-#btnOpenForm:hover {
-  background: #ffaa00;
-}
+
 
 table {
   width: 90%;
