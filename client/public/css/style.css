@@ -24,18 +24,18 @@ body {
 }
 
 .header-container {
-  position: relative; /* Permite posicionar elementos hijos de forma absoluta */
+  position: relative; 
   display: flex;
   align-items: center;
-  justify-content: center; /* Esto centra el h1 */
+  justify-content: center; 
   padding: 15px;
   background: linear-gradient(90deg, #b78ef1, #ffaa00);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 #btnInfo {
-  position: absolute; /* Posición absoluta respecto al contenedor */
-  right: 15px;        /* Alineado a la derecha con 15px de margen */
+  position: absolute; 
+  right: 15px;       
   cursor: pointer;
 }
 
