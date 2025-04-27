@@ -1,6 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+MX+Guides&display=swap');
 
 
+#login-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000; /* Fondo completamente opaco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Por encima de otros elementos */
+}
+
+
+
+#login-modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: center;
+}
+
+#login-modal-content input {
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px;
+  font-size: 14px;
+}
+
+
+
 .pacifico-regular {
   font-family: "Pacifico", cursive;
   font-weight: 400;

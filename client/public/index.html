@@ -6,6 +6,16 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body style="background-image: url('img/banner_colorido.png'); background-size: cover; background-repeat: no-repeat; background-position: center center; ; background-attachment: fixed;">
+  
+  <div id="login-modal">
+    <div id="login-modal-content">
+      <h2>Inicio de sesión</h2>
+      <input type="text" id="username" placeholder="Usuario">
+      <input type="password" id="password" placeholder="Contraseña">
+      <button id="btnLogin" onclick="login()">Ingresar</button>
+    </div>
+  </div>
+  
   <div class="header-container">
     <h1>Agenda de Materias</h1>
     <span id="btnInfo" onclick="showInfo()" title="Acerca de mí">

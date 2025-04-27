@@ -360,6 +360,26 @@ function showInfo() {
   });
 }
 
+function login() {
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  
+  // Validación dummy: usuario "user" y contraseña "pass"
+  if (username === "user" && password === "pass") {
+    document.getElementById('login-modal').style.display = "none";
+    document.body.classList.remove("modal-active");
+  } else {
+    Swal.fire({
+      icon: 'error',
+      title: 'Usuario incorrecto',
+      text: 'Las credenciales ingresadas son incorrectas, por favor intentá de nuevo.',
+      confirmButtonText: 'Aceptar'
+    });
+  }
+}
+
+
+
 function editMateria(id) {
 
   editingMateriaId = id;
