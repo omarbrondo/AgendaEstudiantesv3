@@ -355,7 +355,7 @@ function showInfo() {
           'Karen Micaela Pelozo<br>' +
           'Pamela Chaparro<br>' +
           'Clara Cantarino<br><br>' +
-          '<p><a href="https://docs.google.com/document/d/1zQBbgAdg82HDtQB4AIF1LNaEBVDkqgkTWYfx8hYyluA/edit?tab=t.0" target="_blank" style="color:#3085d6;">Ver documentación</a></p>',
+          '<p><a href="https://onedrive.live.com/:w:/g/personal/223FAEA17A2067C4/EcPgkJ2xdylLmjTwQrPdsGAB_E2FcZT4PeyLIumrlH8IBg?resid=223FAEA17A2067C4!s9d90e0c377b14b299a34f042b3ddb060&ithint=file%2Cdocx&e=NklCwI&migratedtospo=true&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3cvYy8yMjNmYWVhMTdhMjA2N2M0L0VjUGdrSjJ4ZHlsTG1qVHdRclBkc0dBQl9FMkZjWlQ0UGV5TEl1bXJsSDhJQmc_ZT1Oa2xDd0k" target="_blank" style="color:#3085d6;">Ver documentación</a></p>',
     confirmButtonText: 'Aceptar'
   });
 }
