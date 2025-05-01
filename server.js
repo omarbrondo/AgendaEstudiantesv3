@@ -116,7 +116,7 @@ app.post("/register", async (req, res) => {
   }
 });
 
-// En server.js
+//login
 app.post("/login", async (req, res) => {
   try {
     const { nombre, password } = req.body;

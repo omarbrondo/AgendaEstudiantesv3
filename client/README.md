@@ -48,3 +48,27 @@ npm run dev
     }
   ]
 }
+
+# endpoint para dar de altas usuarios
+
+
+- Método: POST
+
+- URL: http://localhost:3000/login
+
+- Headers: Content-Type: application/json
+
+- Body (raw, JSON):
+
+---
+{
+  "nombre": "usuarioEjemplo",
+  "password": "miPasswordSecreta"
+}
+---
+
+### GET, POST, PUT y DELETE a:
+
+http://localhost:3000/materias
+
+http://localhost:3000/materias/:id
