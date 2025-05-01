@@ -361,21 +361,37 @@ function showInfo() {
 }
 
 function login() {
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
   
-  // Validación dummy: usuario "user" y contraseña "pass"
-  if (username === "user" && password === "pass") {
-    document.getElementById('login-modal').style.display = "none";
-    document.body.classList.remove("modal-active");
-  } else {
-    Swal.fire({
-      icon: 'error',
-      title: 'Usuario incorrecto',
-      text: 'Las credenciales ingresadas son incorrectas, por favor intentá de nuevo.',
-      confirmButtonText: 'Aceptar'
+  fetch("/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    // Enviamos las credenciales; observa que el nombre del campo es "nombre", ya que en el modelo se llama así.
+    body: JSON.stringify({ nombre: username, password: password })
+  })
+    .then(response => {
+      if (!response.ok) {
+        return response.json().then(err => { throw new Error(err.error); });
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Si el login es exitoso, se oculta el modal y se puede actualizar la interfaz.
+      document.getElementById("login-modal").style.display = "none";
+      
+      // Aquí podrías, por ejemplo, mostrar un mensaje de bienvenida
+      const headerContainer = document.querySelector(".header-container");
+      headerContainer.innerHTML += `<p style="color: #fff; margin-left: 10px;">Bienvenido, ${data.user.nombre} (${data.user.rol})</p>`;
+    })
+    .catch(error => {
+      Swal.fire({
+        icon: "error",
+        title: "Usuario incorrecto",
+        text: error.message,
+        confirmButtonText: "Aceptar"
+      });
     });
-  }
 }
 
 
